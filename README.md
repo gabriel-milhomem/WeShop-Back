@@ -8,8 +8,11 @@
 4. Crie uma nova database
 
   ```bash
+  $ sudo su postgres
   $ psql
   $ CREATE DATABASE minha_nova_database;
+  //CTRL+D pra sair do psql
+  //CTRL+D pra voltar pro seu usuário (sair do usuário postgres)
   ```
 
 5. Clone o projeto
