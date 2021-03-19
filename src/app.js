@@ -1,4 +1,5 @@
 require('dotenv-flow').config({ silent: true });
+require('./utils/loadRelationships');
 
 const cors = require('cors');
 const express = require('express');
