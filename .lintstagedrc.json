@@ -1,8 +1,7 @@
 {
-  "*.{js}": [
+  "*.js": [
     "eslint --fix",
     "prettier --write",
-    "cross-env NODE_ENV=test CI=true yarn test --bail --findRelatedTest",
     "git add"
   ]
 }
