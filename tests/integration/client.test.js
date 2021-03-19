@@ -17,7 +17,7 @@ afterAll(async () => {
   await sequelize.close();
 });
 
-describe('POST /clients', () => {
+describe('POST /api/clients', () => {
   it('should return 422 when called with wrong phone', async () => {
     const body = {
       name: 'nome teste',
@@ -26,7 +26,7 @@ describe('POST /clients', () => {
       phone: '3433-32'
     };
 
-    const response = await agent.post('/clients').send(body);
+    const response = await agent.post('/api/clients').send(body);
 
     expect(response.status).toBe(422);
     expect(response.body.message).toEqual(
@@ -42,7 +42,7 @@ describe('POST /clients', () => {
       phone: '(34) 33433-3223'
     };
 
-    const response = await agent.post('/clients').send(body);
+    const response = await agent.post('/api/clients').send(body);
 
     expect(response.status).toBe(422);
     expect(response.body.message).toEqual(
@@ -58,7 +58,7 @@ describe('POST /clients', () => {
       phone: '(34) 33433-3223'
     };
 
-    const response = await agent.post('/clients').send(body);
+    const response = await agent.post('/api/clients').send(body);
 
     expect(response.status).toBe(422);
     expect(response.body.message).toEqual(
@@ -74,7 +74,7 @@ describe('POST /clients', () => {
       phone: '(34) 33433-3223'
     };
 
-    const response = await agent.post('/clients').send(body);
+    const response = await agent.post('/api/clients').send(body);
 
     expect(response.status).toBe(422);
     expect(response.body.message).toEqual(
@@ -97,7 +97,7 @@ describe('POST /clients', () => {
       phone: '(34) 33433-3223'
     };
 
-    const response = await agent.post('/clients').send(body);
+    const response = await agent.post('/api/clients').send(body);
 
     expect(response.status).toBe(409);
     expect(response.body.message).toEqual('Cliente já existe!');
@@ -111,7 +111,7 @@ describe('POST /clients', () => {
       phone: '(34) 33433-3223'
     };
 
-    const response = await agent.post('/clients').send(body);
+    const response = await agent.post('/api/clients').send(body);
 
     expect(response.status).toBe(201);
     expect(response.body).toEqual(
@@ -124,6 +124,33 @@ describe('POST /clients', () => {
         createdAt: expect.any(String),
         updatedAt: expect.any(String)
       })
+    );
+  });
+});
+
+describe('GET /api/clients', () => {
+  it('should return 201 and populated the database', async () => {
+    const product1 = await Helpers.createClient(
+      'Gabriel Santo',
+      'email@teste.com',
+      '(23) 99999-9999',
+      '01/01/2000'
+    );
+    const product2 = await Helpers.createClient(
+      'Fernando Queiroz',
+      'google@teste.com',
+      '(55) 55555-5555',
+      '02/02/1999'
+    );
+
+    const response = await agent.get('/api/clients');
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining(product1),
+        expect.objectContaining(product2)
+      ])
     );
   });
 });

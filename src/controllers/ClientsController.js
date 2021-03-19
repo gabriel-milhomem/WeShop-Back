@@ -15,6 +15,10 @@ class CoursesController {
 
     return createdClient;
   }
+
+  getAllClients() {
+    return Client.findAll();
+  }
 }
 
 module.exports = new CoursesController();

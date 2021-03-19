@@ -12,4 +12,10 @@ router.post('/', schemaMiddleware(clientSchemas.create), async (req, res) => {
   return res.status(201).json(product);
 });
 
+router.get('/', async (req, res) => {
+  const clients = await ClientsController.getAllClients(req.body);
+
+  return res.status(200).json(clients);
+});
+
 module.exports = router;

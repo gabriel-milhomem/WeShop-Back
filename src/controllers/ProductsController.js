@@ -17,6 +17,10 @@ class CoursesController {
 
     return createdCourse;
   }
+
+  getAllProducts() {
+    return Product.findAll();
+  }
 }
 
 module.exports = new CoursesController();

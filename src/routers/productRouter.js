@@ -12,4 +12,10 @@ router.post('/', schemaMiddleware(productSchemas.create), async (req, res) => {
   return res.status(201).json(product);
 });
 
+router.get('/', async (req, res) => {
+  const products = await ProductsController.getAllProducts(req.body);
+
+  return res.status(200).json(products);
+});
+
 module.exports = router;
