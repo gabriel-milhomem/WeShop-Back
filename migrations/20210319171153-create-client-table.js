@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      telephone: {
+      phone: {
         type: Sequelize.STRING,
         allowNull: false
       },

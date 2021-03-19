@@ -17,6 +17,16 @@ class Helpers {
     return product;
   }
 
+  async createClient(name, email, phone, birthDate) {
+    let product = await database.query(`
+      INSERT INTO clients (name, email, phone, "birthDate") VALUES ('${name}', '${email}', '${phone}', '${birthDate}') RETURNING *;
+    `);
+
+    product = convertToJson(product);
+
+    return product;
+  }
+
   eraseDatabase() {
     return database.query(`
       DELETE FROM "ordersProducts";
