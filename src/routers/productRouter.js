@@ -3,11 +3,13 @@ const express = require('express');
 const ProductsController = require('../controllers/ProductsController');
 const schemaMiddleware = require('../middlewares/schemaMiddleware');
 const productSchemas = require('../schemas/productSchemas');
+const Utils = require('../utils/Utils');
 
 const router = express.Router();
 
 router.post('/', schemaMiddleware(productSchemas.create), async (req, res) => {
-  const product = await ProductsController.createProduct(req.body);
+  const sanitized = Utils.sanitizeHtml(req.body);
+  const product = await ProductsController.createProduct(sanitized);
 
   return res.status(201).json(product);
 });

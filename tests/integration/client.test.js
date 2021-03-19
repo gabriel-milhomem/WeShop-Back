@@ -68,18 +68,16 @@ describe('POST /api/clients', () => {
 
   it('should return 422 when called with wrong birthDate', async () => {
     const body = {
-      name: '/*-+',
+      name: 'gabriel',
       email: 'gabs@gabs.com',
-      birthDate: '02/2000',
+      birthDate: '65/43/2000',
       phone: '(34) 33433-3223'
     };
 
     const response = await agent.post('/api/clients').send(body);
 
     expect(response.status).toBe(422);
-    expect(response.body.message).toEqual(
-      'Não foi possível processar os dados!'
-    );
+    expect(response.body.details[0]).toEqual('Data inválida');
   });
 
   it('should return 409 when client already exist', async () => {
@@ -105,7 +103,7 @@ describe('POST /api/clients', () => {
 
   it('should return 201 and populated the database', async () => {
     const body = {
-      name: 'teste nome',
+      name: 'Gabriel Santos',
       email: 'gabs@gabs.com',
       birthDate: '02/02/2000',
       phone: '(34) 33433-3223'

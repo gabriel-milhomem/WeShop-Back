@@ -6,7 +6,7 @@
   "author": "Gabriel Milhomem <gabriell.mil@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest --coverage --runInBand",
+    "test": "cross-env NODE_ENV=test jest",
     "dev": "nodemon src/index.js",
     "migrations": "sequelize-cli db:migrate",
     "migrations:undo": "sequelize-cli db:migrate:undo:all",
@@ -49,6 +49,7 @@
     "express-async-errors": "^3.1.1",
     "joi": "^17.4.0",
     "pg": "^8.5.1",
-    "sequelize": "^6.5.1"
+    "sequelize": "^6.5.1",
+    "string-strip-html": "^8.2.5"
   }
 }

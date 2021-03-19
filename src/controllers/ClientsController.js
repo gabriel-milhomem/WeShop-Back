@@ -1,4 +1,5 @@
 const Client = require('../models/Client');
+const Utils = require('../utils/Utils');
 const ConflictError = require('../errors/ConflictError');
 
 class CoursesController {
@@ -11,6 +12,7 @@ class CoursesController {
       throw new ConflictError('Cliente');
     }
 
+    clientData.name = Utils.capitalizeAllAndTrim(clientData.name);
     const createdClient = await Client.create(clientData);
 
     return createdClient;
