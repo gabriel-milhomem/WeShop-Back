@@ -19,4 +19,10 @@ router.delete('/:id', async (req, res) => {
   return res.sendStatus(204);
 });
 
+router.post('/', schemaMiddleware(orderSchemas.create), async (req, res) => {
+  const order = await OrdersController.createOrder(req.body);
+
+  return res.status(201).json(order);
+});
+
 module.exports = router;

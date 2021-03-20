@@ -25,6 +25,17 @@ class OrdersController {
     return allOrders;
   }
 
+  async createOrder(data) {
+    const { clientId, orders } = data;
+    const purchase = await Order.create({ clientId });
+
+    const allOrders = orders.map(order => ({ ...order, orderId: purchase.id }));
+    await OrdersProduct.bulkCreate(allOrders);
+
+    const order = await Order.findByPk(purchase.id, { include: Product });
+    return order;
+  }
+
   async destroyOrder(id) {
     const order = await Order.findByPk(id);
 
