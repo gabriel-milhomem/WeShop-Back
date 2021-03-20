@@ -30,6 +30,24 @@ class Utils {
 
     return object;
   }
+
+  putTotalAndPartialPrice(order) {
+    let total = 0;
+
+    order.products.forEach(product => {
+      const { ordersProduct, price } = product;
+      const auxQuantity = ordersProduct.quantity;
+      delete product.ordersProduct;
+
+      product.quantity = auxQuantity;
+      product.partialValue = (auxQuantity * price) / 100;
+
+      total += product.partialValue;
+    });
+
+    order.total = total;
+    return order;
+  }
 }
 
 module.exports = new Utils();
