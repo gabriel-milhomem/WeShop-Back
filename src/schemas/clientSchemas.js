@@ -1,4 +1,3 @@
-const { InvalidDataError } = require('../errors/InvalidDataError');
 const Joi = require('joi');
 
 function validateDate(value, helpers) {
@@ -23,6 +22,7 @@ function validateDate(value, helpers) {
 
   return helpers.message('Data inválida');
 }
+
 const create = Joi.object({
   name: Joi.string()
     .pattern(/^[A-z\u00C0-\u00ff ]+$/, 'validate letters and accent')
