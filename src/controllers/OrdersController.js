@@ -29,22 +29,47 @@ class OrdersController {
     const { clientId, orders } = data;
     const purchase = await Order.create({ clientId });
 
-    const allOrders = orders.map(order => ({ ...order, orderId: purchase.id }));
-    await OrdersProduct.bulkCreate(allOrders);
+    const allConnections = orders.map(order => ({
+      ...order,
+      orderId: purchase.id
+    }));
+    await OrdersProduct.bulkCreate(allConnections);
 
-    const order = await Order.findByPk(purchase.id, { include: Product });
+    const order = await this.getOrder(purchase.id);
     return order;
   }
 
-  async destroyOrder(id) {
-    const order = await Order.findByPk(id);
+  async getOrder(id) {
+    const order = await Order.findByPk(id, { include: Product });
 
     if (!order) {
       throw new NotFoundError('Pedido');
     }
 
+    return order;
+  }
+
+  async destroyOrder(id) {
+    const order = await this.getOrder(id);
+
     await OrdersProduct.destroy({ where: { orderId: id } });
     await order.destroy();
+  }
+
+  async updateOrder(id, data) {
+    await this.getOrder(id);
+
+    await OrdersProduct.destroy({ where: { orderId: id } });
+
+    const allConnections = data.orders.map(order => ({
+      ...order,
+      orderId: id
+    }));
+
+    await OrdersProduct.bulkCreate(allConnections);
+    const order = await this.getOrder(id);
+
+    return order;
   }
 }
 

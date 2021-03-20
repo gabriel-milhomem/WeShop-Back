@@ -11,7 +11,7 @@ function schemaMiddleware(schema) {
       );
     }
 
-    next();
+    return next();
   };
 }
 
