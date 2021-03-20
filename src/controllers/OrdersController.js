@@ -16,7 +16,8 @@ class OrdersController {
           model: Product,
           through: { attributes: ['quantity'] }
         }
-      ]
+      ],
+      required: true
     });
 
     orders = JSON.parse(JSON.stringify(orders));

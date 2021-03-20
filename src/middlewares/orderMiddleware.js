@@ -1,14 +1,13 @@
 const ClientsController = require('../controllers/ClientsController');
-const ProductControllers = require('../controllers/ProductsController');
+const ProductsController = require('../controllers/ProductsController');
 
 async function orderMiddleware(req, res, next) {
   const { clientId, orders } = req.body;
 
   await ClientsController.getClient(clientId);
   await Promise.all(
-    orders.map(order => ProductControllers.getProduct(order.productId))
+    orders.map(order => ProductsController.getProduct(order.productId))
   );
-
   return next();
 }
 

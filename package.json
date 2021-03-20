@@ -6,7 +6,7 @@
   "author": "Gabriel Milhomem <gabriell.mil@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest",
+    "test": "cross-env NODE_ENV=test jest -i",
     "dev": "nodemon src/index.js",
     "migrations": "sequelize-cli db:migrate",
     "migrations:undo": "sequelize-cli db:migrate:undo:all",

@@ -81,16 +81,11 @@ describe('POST /api/clients', () => {
   });
 
   it('should return 409 when client already exist', async () => {
-    await Helpers.createClient(
-      'teste',
-      'gabs@gabs.com',
-      '03/03/2000',
-      '(23) 34234-4232'
-    );
+    await Helpers.createClient();
 
     const body = {
       name: 'teste nome',
-      email: 'gabs@gabs.com',
+      email: 'li@si.com',
       birthDate: '02/02/2000',
       phone: '(34) 33433-3223'
     };
@@ -101,7 +96,7 @@ describe('POST /api/clients', () => {
     expect(response.body.message).toEqual('Cliente já existe!');
   });
 
-  it('should return 201 and populated the database', async () => {
+  it('should return 201 and fill the database', async () => {
     const body = {
       name: 'Gabriel Santos',
       email: 'gabs@gabs.com',
@@ -127,7 +122,7 @@ describe('POST /api/clients', () => {
 });
 
 describe('GET /api/clients', () => {
-  it('should return 201 and populated the database', async () => {
+  it('should return 200 and get all clients', async () => {
     const product1 = await Helpers.createClient(
       'Gabriel Santo',
       'email@teste.com',

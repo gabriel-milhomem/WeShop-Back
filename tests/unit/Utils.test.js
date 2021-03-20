@@ -54,3 +54,34 @@ describe('function capitalizeAllAndTrim', () => {
     expect(result).toEqual(expectedName);
   });
 });
+
+describe('function putTotalAndPartialPrice', () => {
+  it('should return an name capitalized', () => {
+    const data = {
+      products: [
+        { ordersProduct: { quantity: 2 }, price: 15000 },
+        { ordersProduct: { quantity: 7 }, price: 10000 }
+      ]
+    };
+
+    const expectedData = {
+      total: 1000,
+      products: [
+        { quantity: 2, price: 15000, partialValue: 300 },
+        { quantity: 7, price: 10000, partialValue: 700 }
+      ]
+    };
+
+    const result = Utils.putTotalAndPartialPrice(data);
+
+    expect(result).toEqual(expectedData);
+  });
+
+  it('should return undefined when products is empty', () => {
+    const data = { products: [] };
+
+    const result = Utils.putTotalAndPartialPrice(data);
+
+    expect(result).toBeUndefined();
+  });
+});

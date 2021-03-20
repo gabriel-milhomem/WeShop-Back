@@ -39,7 +39,7 @@ describe('POST /products', () => {
   });
 
   it('should return 409 when product already exist', async () => {
-    await Helpers.createProduct('televisão', 7888);
+    await Helpers.createProduct();
     const body = { price: 2344, name: 'TELEVISÃO' };
     const response = await agent.post('/api/products').send(body);
 
@@ -47,7 +47,7 @@ describe('POST /products', () => {
     expect(response.body.message).toEqual('Produto já existe!');
   });
 
-  it('should return 201 and populated the database', async () => {
+  it('should return 201 and fill the database', async () => {
     const body = { price: 2344, name: 'televisão' };
     const response = await agent.post('/api/products').send(body);
 
@@ -65,8 +65,8 @@ describe('POST /products', () => {
 });
 
 describe('GET /api/products', () => {
-  it('should return 201 and populated the database', async () => {
-    const product1 = await Helpers.createProduct('Mouse', 44423);
+  it('should return 200 and get all products', async () => {
+    const product1 = await Helpers.createProduct();
     const product2 = await Helpers.createProduct('Celular', 32342);
 
     const response = await agent.get('/api/products');

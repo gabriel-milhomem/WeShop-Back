@@ -8,7 +8,7 @@ const orderSchemas = require('../schemas/orderSchemas');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  const orders = await OrdersController.getAllOrders(req.body);
+  const orders = await OrdersController.getAllOrders();
 
   return res.status(200).json(orders);
 });
@@ -25,9 +25,9 @@ router.post(
   schemaMiddleware(orderSchemas.create),
   orderMiddleware,
   async (req, res) => {
-    const order = await OrdersController.createOrder(req.body);
+    await OrdersController.createOrder(req.body);
 
-    return res.status(201).json(order);
+    return res.sendStatus(201);
   }
 );
 
@@ -38,9 +38,9 @@ router.put(
   async (req, res) => {
     const id = +req.params.id;
 
-    const order = await OrdersController.updateOrder(id, req.body);
+    await OrdersController.updateOrder(id, req.body);
 
-    return res.status(200).json(order);
+    return res.sendStatus(200);
   }
 );
 

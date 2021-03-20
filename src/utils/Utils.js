@@ -32,6 +32,8 @@ class Utils {
   }
 
   putTotalAndPartialPrice(order) {
+    if (order.products.length === 0) return;
+
     let total = 0;
 
     order.products.forEach(product => {

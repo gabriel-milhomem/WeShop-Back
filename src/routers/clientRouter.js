@@ -15,7 +15,7 @@ router.post('/', schemaMiddleware(clientSchemas.create), async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-  const clients = await ClientsController.getAllClients(req.body);
+  const clients = await ClientsController.getAllClients();
 
   return res.status(200).json(clients);
 });

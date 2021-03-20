@@ -15,7 +15,7 @@ router.post('/', schemaMiddleware(productSchemas.create), async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-  const products = await ProductsController.getAllProducts(req.body);
+  const products = await ProductsController.getAllProducts();
 
   return res.status(200).json(products);
 });
