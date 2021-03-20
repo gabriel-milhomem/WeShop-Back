@@ -67,8 +67,8 @@ describe('function putTotalAndPartialPrice', () => {
     const expectedData = {
       total: 1000,
       products: [
-        { quantity: 2, price: 15000, partialValue: 300 },
-        { quantity: 7, price: 10000, partialValue: 700 }
+        { quantity: 2, price: 150, partialValue: 300 },
+        { quantity: 7, price: 100, partialValue: 700 }
       ]
     };
 

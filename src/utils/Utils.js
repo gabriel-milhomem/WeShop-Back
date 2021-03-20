@@ -43,6 +43,7 @@ class Utils {
 
       product.quantity = auxQuantity;
       product.partialValue = (auxQuantity * price) / 100;
+      product.price = price / 100;
 
       total += product.partialValue;
     });
